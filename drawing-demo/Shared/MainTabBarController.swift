@@ -3,7 +3,7 @@
 //  drawing-demo
 //
 //  Created by Ben Norris on 4/24/19.
-//  Copyright © 2019 Ben Norris. All rights reserved.
+//  Copyright © 2019 O.C. Tanner. All rights reserved.
 //
 
 import UIKit
