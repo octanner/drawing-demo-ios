@@ -24,8 +24,8 @@ class GameScene: SKScene {
     private var gapNode: Gap?
     private var shouldTapToStart = true
     private var obstacles = [Obstacle]()
-    private var backgroundOne = SKSpriteNode(imageNamed: "paper")
-    private var backgroundTwo = SKSpriteNode(imageNamed: "paper")
+    private var backgroundOne = SKSpriteNode(imageNamed: "background")
+    private var backgroundTwo = SKSpriteNode(imageNamed: "background")
     
     
     // MARK: - Computed properties
