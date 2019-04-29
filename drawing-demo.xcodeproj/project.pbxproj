@@ -24,6 +24,17 @@
 		E7F354242270BD6100612A79 /* FourthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F354222270BD6100612A79 /* FourthViewController.swift */; };
 		E7F354292270BD6E00612A79 /* FifthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F354262270BD6E00612A79 /* FifthViewController.swift */; };
 		E7F3542A2270BD6E00612A79 /* FifthViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7F354272270BD6E00612A79 /* FifthViewController.storyboard */; };
+		EEBBE1B42277856B006F5736 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBBE1AA2277856A006F5736 /* GameScene.swift */; };
+		EEBBE1B52277856B006F5736 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = EEBBE1AB2277856A006F5736 /* Actions.sks */; };
+		EEBBE1B62277856B006F5736 /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBBE1AC2277856A006F5736 /* Obstacle.swift */; };
+		EEBBE1B72277856B006F5736 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBBE1AD2277856A006F5736 /* Player.swift */; };
+		EEBBE1B82277856B006F5736 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBBE1AE2277856A006F5736 /* Keys.swift */; };
+		EEBBE1B92277856B006F5736 /* Spark.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBBE1AF2277856A006F5736 /* Spark.swift */; };
+		EEBBE1BA2277856B006F5736 /* CategoryMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBBE1B02277856A006F5736 /* CategoryMask.swift */; };
+		EEBBE1BB2277856B006F5736 /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBBE1B12277856A006F5736 /* Line.swift */; };
+		EEBBE1BC2277856B006F5736 /* Gap.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEBBE1B22277856A006F5736 /* Gap.swift */; };
+		EEBBE1BD2277856B006F5736 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = EEBBE1B32277856B006F5736 /* GameScene.sks */; };
+		EEBBE1BF2277857D006F5736 /* Spark.sks in Resources */ = {isa = PBXBuildFile; fileRef = EEBBE1BE2277857D006F5736 /* Spark.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +78,17 @@
 		E7F354222270BD6100612A79 /* FourthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FourthViewController.swift; sourceTree = "<group>"; };
 		E7F354262270BD6E00612A79 /* FifthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FifthViewController.swift; sourceTree = "<group>"; };
 		E7F354282270BD6E00612A79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/FifthViewController.storyboard; sourceTree = "<group>"; };
+		EEBBE1AA2277856A006F5736 /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		EEBBE1AB2277856A006F5736 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
+		EEBBE1AC2277856A006F5736 /* Obstacle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Obstacle.swift; sourceTree = "<group>"; };
+		EEBBE1AD2277856A006F5736 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		EEBBE1AE2277856A006F5736 /* Keys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		EEBBE1AF2277856A006F5736 /* Spark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Spark.swift; sourceTree = "<group>"; };
+		EEBBE1B02277856A006F5736 /* CategoryMask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryMask.swift; sourceTree = "<group>"; };
+		EEBBE1B12277856A006F5736 /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
+		EEBBE1B22277856A006F5736 /* Gap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gap.swift; sourceTree = "<group>"; };
+		EEBBE1B32277856B006F5736 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		EEBBE1BE2277857D006F5736 /* Spark.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Spark.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +131,17 @@
 			children = (
 				E746F6FD2270BBBB00ED97C5 /* FirstViewController.storyboard */,
 				E7AD9BD42270B8D5005B1958 /* FirstViewController.swift */,
+				EEBBE1AB2277856A006F5736 /* Actions.sks */,
+				EEBBE1B02277856A006F5736 /* CategoryMask.swift */,
+				EEBBE1B32277856B006F5736 /* GameScene.sks */,
+				EEBBE1AA2277856A006F5736 /* GameScene.swift */,
+				EEBBE1B22277856A006F5736 /* Gap.swift */,
+				EEBBE1AE2277856A006F5736 /* Keys.swift */,
+				EEBBE1B12277856A006F5736 /* Line.swift */,
+				EEBBE1AC2277856A006F5736 /* Obstacle.swift */,
+				EEBBE1AD2277856A006F5736 /* Player.swift */,
+				EEBBE1AF2277856A006F5736 /* Spark.swift */,
+				EEBBE1BE2277857D006F5736 /* Spark.sks */,
 			);
 			path = First;
 			sourceTree = "<group>";
@@ -308,11 +341,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7F354232270BD6100612A79 /* FourthViewController.storyboard in Resources */,
+				EEBBE1B52277856B006F5736 /* Actions.sks in Resources */,
 				E746F6FE2270BBBB00ED97C5 /* FirstViewController.storyboard in Resources */,
 				E7AD9BDF2270B8D6005B1958 /* LaunchScreen.storyboard in Resources */,
 				E7A4FB162270BCCA00F1B959 /* SecondViewController.storyboard in Resources */,
 				E7F3541E2270BD5500612A79 /* ThirdViewController.storyboard in Resources */,
+				EEBBE1BD2277856B006F5736 /* GameScene.sks in Resources */,
 				E7F3542A2270BD6E00612A79 /* FifthViewController.storyboard in Resources */,
+				EEBBE1BF2277857D006F5736 /* Spark.sks in Resources */,
 				E7AD9BDC2270B8D6005B1958 /* Assets.xcassets in Resources */,
 				E7AD9BDA2270B8D5005B1958 /* Main.storyboard in Resources */,
 			);
@@ -341,11 +377,19 @@
 			files = (
 				E7F354242270BD6100612A79 /* FourthViewController.swift in Sources */,
 				E7AD9BD72270B8D5005B1958 /* SecondViewController.swift in Sources */,
+				EEBBE1B42277856B006F5736 /* GameScene.swift in Sources */,
+				EEBBE1B92277856B006F5736 /* Spark.swift in Sources */,
 				E7AD9BD32270B8D5005B1958 /* AppDelegate.swift in Sources */,
+				EEBBE1BB2277856B006F5736 /* Line.swift in Sources */,
+				EEBBE1B82277856B006F5736 /* Keys.swift in Sources */,
 				E7F3541D2270BD5500612A79 /* ThirdViewController.swift in Sources */,
 				E7AD9BD52270B8D5005B1958 /* FirstViewController.swift in Sources */,
 				E746F6F92270BAE000ED97C5 /* MainTabBarController.swift in Sources */,
 				E7F354292270BD6E00612A79 /* FifthViewController.swift in Sources */,
+				EEBBE1B72277856B006F5736 /* Player.swift in Sources */,
+				EEBBE1BA2277856B006F5736 /* CategoryMask.swift in Sources */,
+				EEBBE1B62277856B006F5736 /* Obstacle.swift in Sources */,
+				EEBBE1BC2277856B006F5736 /* Gap.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
