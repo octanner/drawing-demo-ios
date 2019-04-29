@@ -14,7 +14,6 @@ class GameScene: SKScene {
     // MARK: - Properties
     
     private var label : SKLabelNode?
-    private var lineNode : Line?
     private let playerCamera = SKCameraNode()
     private var previousLocation: CGPoint?
     private var startingPosition: CGPoint = CGPoint.zero
@@ -25,6 +24,8 @@ class GameScene: SKScene {
     private var gapNode: Gap?
     private var shouldTapToStart = true
     private var obstacles = [Obstacle]()
+    private var backgroundOne = SKSpriteNode(imageNamed: "paper")
+    private var backgroundTwo = SKSpriteNode(imageNamed: "paper")
     
     
     // MARK: - Computed properties
@@ -50,6 +51,14 @@ class GameScene: SKScene {
     // MARK: - Setup
     
     override func didMove(to view: SKView) {
+        backgroundOne.position = CGPoint(x: frame.size.width / 2 - 200, y: frame.size.height / 2)
+        backgroundOne.zPosition = -5
+        addChild(backgroundOne)
+        
+        backgroundTwo.position = CGPoint(x: backgroundOne.position.x + backgroundOne.frame.width, y: frame.size.height / 2)
+        backgroundTwo.zPosition = -5
+        addChild(backgroundTwo)
+        
         boostLabel = UILabel(frame: CGRect(x: view.frame.width - 150, y: 40, width: 100, height: 40))
         guard let boostLabel = boostLabel else { return }
         boostLabel.font = UIFont.systemFont(ofSize: 21, weight: .semibold)
@@ -88,6 +97,8 @@ class GameScene: SKScene {
         gapNode = Gap(color: .black, size: CGSize(width: 500, height: size.height * 2))
         if let gapNode = gapNode {
             gapNode.configure(with: position)
+            gapNode.zPosition = -2
+            gapNode.alpha = 1.0
             addChild(gapNode)
         }
     }
@@ -170,6 +181,7 @@ class GameScene: SKScene {
             }
             updateGap()
             updateObstacles()
+            updateBackground()
         }
     }
     
@@ -204,7 +216,8 @@ private extension GameScene {
         emitter?.isHidden = true
         highScoreLabel?.run(SKAction.scale(to: 1.0, duration: 0.25))
         tapToStartLabel?.run(SKAction.scale(to: 1.0, duration: 0.25))
-
+        backgroundOne.position = CGPoint(x: frame.size.width / 2 - 200, y: frame.size.height / 2)
+        backgroundTwo.position = CGPoint(x: backgroundOne.position.x + backgroundOne.frame.width, y: frame.size.height / 2)
     }
 
     func boostActivated() {
@@ -212,6 +225,16 @@ private extension GameScene {
         player.boost()
         emitter?.runBoostAnimation()
         updateBoostLabel()
+    }
+    
+    func updateBackground() {
+        guard let player = player else { return }
+        if player.position.x - backgroundOne.position.x >= backgroundOne.frame.width {
+            backgroundOne.position = CGPoint(x: backgroundTwo.position.x + backgroundTwo.frame.width, y: backgroundOne.position.y)
+        }
+        if player.position.x - backgroundTwo.position.x >= backgroundTwo.frame.width {
+            backgroundTwo.position = CGPoint(x: backgroundOne.position.x + backgroundOne.frame.width, y: backgroundOne.position.y)
+        }
     }
     
     func updateBoostLabel() {
@@ -237,7 +260,7 @@ private extension GameScene {
         guard let player = player, !shouldTapToStart else { return }
         let numberOfObstacles = (score / 100) + 1
         if obstacles.count < numberOfObstacles {
-            let obstacle = Obstacle(texture: SKTexture(imageNamed: "bokeh"), color: .red, size: CGSize(width: 80, height: 80))
+            let obstacle = Obstacle(texture: SKTexture(imageNamed: "obstacle"), color: .red, size: CGSize(width: 70, height: 80))
             addChild(obstacle)
             obstacle.respawn(basedOn: player.position)
             obstacles.append(obstacle)
@@ -256,8 +279,6 @@ private extension GameScene {
     }
     
     func draw(at touch: UITouch) {
-        guard !shouldTapToStart else { return }
-
         let location = touch.location(in: self)
         guard shouldDraw(at: location) else {
             previousLocation = nil

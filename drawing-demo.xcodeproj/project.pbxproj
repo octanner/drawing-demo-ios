@@ -131,10 +131,9 @@
 			children = (
 				E746F6FD2270BBBB00ED97C5 /* FirstViewController.storyboard */,
 				E7AD9BD42270B8D5005B1958 /* FirstViewController.swift */,
-				EEBBE1AB2277856A006F5736 /* Actions.sks */,
-				EEBBE1B02277856A006F5736 /* CategoryMask.swift */,
 				EEBBE1B32277856B006F5736 /* GameScene.sks */,
 				EEBBE1AA2277856A006F5736 /* GameScene.swift */,
+				EEBBE1B02277856A006F5736 /* CategoryMask.swift */,
 				EEBBE1B22277856A006F5736 /* Gap.swift */,
 				EEBBE1AE2277856A006F5736 /* Keys.swift */,
 				EEBBE1B12277856A006F5736 /* Line.swift */,
@@ -142,6 +141,7 @@
 				EEBBE1AD2277856A006F5736 /* Player.swift */,
 				EEBBE1AF2277856A006F5736 /* Spark.swift */,
 				EEBBE1BE2277857D006F5736 /* Spark.sks */,
+				EEBBE1AB2277856A006F5736 /* Actions.sks */,
 			);
 			path = First;
 			sourceTree = "<group>";
