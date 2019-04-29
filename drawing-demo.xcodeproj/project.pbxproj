@@ -7,12 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A140002722776DD5001BC883 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A140002022776DD5001BC883 /* CoreDataStack.swift */; };
+		A140002822776DD5001BC883 /* SecondViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A140002122776DD5001BC883 /* SecondViewController.storyboard */; };
+		A140002A22776DD5001BC883 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A140002522776DD5001BC883 /* SecondViewController.swift */; };
+		A140003722776EF2001BC883 /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A140002E22776EF1001BC883 /* RingView.swift */; };
+		A140003822776EF2001BC883 /* StrokeCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A140002F22776EF1001BC883 /* StrokeCollection.swift */; };
+		A140003922776EF2001BC883 /* CanvasContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A140003022776EF1001BC883 /* CanvasContainerView.swift */; };
+		A140003A22776EF2001BC883 /* CGDrawingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A140003122776EF1001BC883 /* CGDrawingEngine.swift */; };
+		A140003B22776EF2001BC883 /* CGMathExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A140003222776EF2001BC883 /* CGMathExtensions.swift */; };
+		A140003C22776EF2001BC883 /* Canvas.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A140003322776EF2001BC883 /* Canvas.storyboard */; };
+		A140003D22776EF2001BC883 /* RingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A140003422776EF2001BC883 /* RingControl.swift */; };
+		A140003E22776EF2001BC883 /* StrokeGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A140003522776EF2001BC883 /* StrokeGestureRecognizer.swift */; };
+		A140003F22776EF2001BC883 /* CanvasMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A140003622776EF2001BC883 /* CanvasMainViewController.swift */; };
+		A140004122776FD8001BC883 /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A140004022776FD8001BC883 /* Drawing.swift */; };
+		A140004322777147001BC883 /* EntityDefining.swift in Sources */ = {isa = PBXBuildFile; fileRef = A140004222777147001BC883 /* EntityDefining.swift */; };
+		A140004922777544001BC883 /* DrawingDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A140004722777544001BC883 /* DrawingDemo.xcdatamodeld */; };
+		A140004B22777719001BC883 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A140004A22777719001BC883 /* CoreDataManager.swift */; };
 		E746F6F92270BAE000ED97C5 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E746F6F82270BAE000ED97C5 /* MainTabBarController.swift */; };
 		E746F6FE2270BBBB00ED97C5 /* FirstViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E746F6FD2270BBBB00ED97C5 /* FirstViewController.storyboard */; };
-		E7A4FB162270BCCA00F1B959 /* SecondViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7A4FB142270BCCA00F1B959 /* SecondViewController.storyboard */; };
 		E7AD9BD32270B8D5005B1958 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AD9BD22270B8D5005B1958 /* AppDelegate.swift */; };
 		E7AD9BD52270B8D5005B1958 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AD9BD42270B8D5005B1958 /* FirstViewController.swift */; };
-		E7AD9BD72270B8D5005B1958 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AD9BD62270B8D5005B1958 /* SecondViewController.swift */; };
 		E7AD9BDA2270B8D5005B1958 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7AD9BD82270B8D5005B1958 /* Main.storyboard */; };
 		E7AD9BDC2270B8D6005B1958 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7AD9BDB2270B8D6005B1958 /* Assets.xcassets */; };
 		E7AD9BDF2270B8D6005B1958 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7AD9BDD2270B8D6005B1958 /* LaunchScreen.storyboard */; };
@@ -44,13 +58,27 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A140002022776DD5001BC883 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		A140002222776DD5001BC883 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SecondViewController.storyboard; sourceTree = "<group>"; };
+		A140002522776DD5001BC883 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		A140002E22776EF1001BC883 /* RingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingView.swift; sourceTree = "<group>"; };
+		A140002F22776EF1001BC883 /* StrokeCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeCollection.swift; sourceTree = "<group>"; };
+		A140003022776EF1001BC883 /* CanvasContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasContainerView.swift; sourceTree = "<group>"; };
+		A140003122776EF1001BC883 /* CGDrawingEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGDrawingEngine.swift; sourceTree = "<group>"; };
+		A140003222776EF2001BC883 /* CGMathExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGMathExtensions.swift; sourceTree = "<group>"; };
+		A140003322776EF2001BC883 /* Canvas.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Canvas.storyboard; sourceTree = "<group>"; };
+		A140003422776EF2001BC883 /* RingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RingControl.swift; sourceTree = "<group>"; };
+		A140003522776EF2001BC883 /* StrokeGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeGestureRecognizer.swift; sourceTree = "<group>"; };
+		A140003622776EF2001BC883 /* CanvasMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasMainViewController.swift; sourceTree = "<group>"; };
+		A140004022776FD8001BC883 /* Drawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
+		A140004222777147001BC883 /* EntityDefining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityDefining.swift; sourceTree = "<group>"; };
+		A140004822777544001BC883 /* DrawingDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DrawingDemo.xcdatamodel; sourceTree = "<group>"; };
+		A140004A22777719001BC883 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		E746F6F82270BAE000ED97C5 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		E746F6FD2270BBBB00ED97C5 /* FirstViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = FirstViewController.storyboard; path = Base.lproj/FirstViewController.storyboard; sourceTree = "<group>"; };
-		E7A4FB152270BCCA00F1B959 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SecondViewController.storyboard; sourceTree = "<group>"; };
 		E7AD9BCF2270B8D5005B1958 /* drawing-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "drawing-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7AD9BD22270B8D5005B1958 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7AD9BD42270B8D5005B1958 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		E7AD9BD62270B8D5005B1958 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		E7AD9BD92270B8D5005B1958 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E7AD9BDB2270B8D6005B1958 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E7AD9BDE2270B8D6005B1958 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -94,6 +122,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A140001F22776DD5001BC883 /* Second */ = {
+			isa = PBXGroup;
+			children = (
+				A140002022776DD5001BC883 /* CoreDataStack.swift */,
+				A140004022776FD8001BC883 /* Drawing.swift */,
+				A140004A22777719001BC883 /* CoreDataManager.swift */,
+				A140004722777544001BC883 /* DrawingDemo.xcdatamodeld */,
+				A140004222777147001BC883 /* EntityDefining.swift */,
+				A140002122776DD5001BC883 /* SecondViewController.storyboard */,
+				A140002522776DD5001BC883 /* SecondViewController.swift */,
+				A140002D22776EA0001BC883 /* SpeedSketch */,
+			);
+			path = Second;
+			sourceTree = "<group>";
+		};
+		A140002D22776EA0001BC883 /* SpeedSketch */ = {
+			isa = PBXGroup;
+			children = (
+				A140003322776EF2001BC883 /* Canvas.storyboard */,
+				A140003022776EF1001BC883 /* CanvasContainerView.swift */,
+				A140003622776EF2001BC883 /* CanvasMainViewController.swift */,
+				A140003122776EF1001BC883 /* CGDrawingEngine.swift */,
+				A140003222776EF2001BC883 /* CGMathExtensions.swift */,
+				A140003422776EF2001BC883 /* RingControl.swift */,
+				A140002E22776EF1001BC883 /* RingView.swift */,
+				A140002F22776EF1001BC883 /* StrokeCollection.swift */,
+				A140003522776EF2001BC883 /* StrokeGestureRecognizer.swift */,
+			);
+			path = SpeedSketch;
+			sourceTree = "<group>";
+		};
 		E746F6FA2270BB3B00ED97C5 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,15 +170,6 @@
 				E7AD9BD42270B8D5005B1958 /* FirstViewController.swift */,
 			);
 			path = First;
-			sourceTree = "<group>";
-		};
-		E746F6FC2270BB5100ED97C5 /* Second */ = {
-			isa = PBXGroup;
-			children = (
-				E7A4FB142270BCCA00F1B959 /* SecondViewController.storyboard */,
-				E7AD9BD62270B8D5005B1958 /* SecondViewController.swift */,
-			);
-			path = Second;
 			sourceTree = "<group>";
 		};
 		E7AD9BC62270B8D5005B1958 = {
@@ -147,8 +197,8 @@
 			children = (
 				E7AD9BD22270B8D5005B1958 /* AppDelegate.swift */,
 				E746F6FA2270BB3B00ED97C5 /* Shared */,
+				A140001F22776DD5001BC883 /* Second */,
 				E746F6FB2270BB4700ED97C5 /* First */,
-				E746F6FC2270BB5100ED97C5 /* Second */,
 				E7F354192270BD5500612A79 /* Third */,
 				E7F3541F2270BD6100612A79 /* Fourth */,
 				E7F354252270BD6E00612A79 /* Fifth */,
@@ -308,9 +358,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7F354232270BD6100612A79 /* FourthViewController.storyboard in Resources */,
+				A140003C22776EF2001BC883 /* Canvas.storyboard in Resources */,
+				A140002822776DD5001BC883 /* SecondViewController.storyboard in Resources */,
 				E746F6FE2270BBBB00ED97C5 /* FirstViewController.storyboard in Resources */,
 				E7AD9BDF2270B8D6005B1958 /* LaunchScreen.storyboard in Resources */,
-				E7A4FB162270BCCA00F1B959 /* SecondViewController.storyboard in Resources */,
 				E7F3541E2270BD5500612A79 /* ThirdViewController.storyboard in Resources */,
 				E7F3542A2270BD6E00612A79 /* FifthViewController.storyboard in Resources */,
 				E7AD9BDC2270B8D6005B1958 /* Assets.xcassets in Resources */,
@@ -339,12 +390,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A140003A22776EF2001BC883 /* CGDrawingEngine.swift in Sources */,
+				A140004922777544001BC883 /* DrawingDemo.xcdatamodeld in Sources */,
+				A140003722776EF2001BC883 /* RingView.swift in Sources */,
+				A140002722776DD5001BC883 /* CoreDataStack.swift in Sources */,
+				A140003B22776EF2001BC883 /* CGMathExtensions.swift in Sources */,
+				A140003D22776EF2001BC883 /* RingControl.swift in Sources */,
 				E7F354242270BD6100612A79 /* FourthViewController.swift in Sources */,
-				E7AD9BD72270B8D5005B1958 /* SecondViewController.swift in Sources */,
+				A140003E22776EF2001BC883 /* StrokeGestureRecognizer.swift in Sources */,
+				A140003822776EF2001BC883 /* StrokeCollection.swift in Sources */,
+				A140002A22776DD5001BC883 /* SecondViewController.swift in Sources */,
+				A140003F22776EF2001BC883 /* CanvasMainViewController.swift in Sources */,
 				E7AD9BD32270B8D5005B1958 /* AppDelegate.swift in Sources */,
+				A140004322777147001BC883 /* EntityDefining.swift in Sources */,
 				E7F3541D2270BD5500612A79 /* ThirdViewController.swift in Sources */,
 				E7AD9BD52270B8D5005B1958 /* FirstViewController.swift in Sources */,
+				A140004122776FD8001BC883 /* Drawing.swift in Sources */,
 				E746F6F92270BAE000ED97C5 /* MainTabBarController.swift in Sources */,
+				A140003922776EF2001BC883 /* CanvasContainerView.swift in Sources */,
+				A140004B22777719001BC883 /* CoreDataManager.swift in Sources */,
 				E7F354292270BD6E00612A79 /* FifthViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,10 +445,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		E7A4FB142270BCCA00F1B959 /* SecondViewController.storyboard */ = {
+		A140002122776DD5001BC883 /* SecondViewController.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				E7A4FB152270BCCA00F1B959 /* Base */,
+				A140002222776DD5001BC883 /* Base */,
 			);
 			name = SecondViewController.storyboard;
 			sourceTree = "<group>";
@@ -706,6 +770,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A140004722777544001BC883 /* DrawingDemo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A140004822777544001BC883 /* DrawingDemo.xcdatamodel */,
+			);
+			currentVersion = A140004822777544001BC883 /* DrawingDemo.xcdatamodel */;
+			path = DrawingDemo.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E7AD9BC72270B8D5005B1958 /* Project object */;
 }

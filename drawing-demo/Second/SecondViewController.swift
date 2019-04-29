@@ -9,14 +9,70 @@
 //
 
 import UIKit
+import CoreData
 
 class SecondViewController: UIViewController {
-
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    private let coreDataManager = CoreDataManager.shared
+    private var drawings = [Drawing]()
+    
+    lazy var fetchedResultsController: NSFetchedResultsController<Drawing> = {
+        let fetchRequest = NSFetchRequest<Drawing>(entityName: Drawing.entityName)
+        let sortDescriptor = NSSortDescriptor(key: "createdAt", ascending: false)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.shared.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        frc.delegate = self
+        return frc
+    }()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        try? fetchedResultsController.performFetch()
+    }
 
 }
 
+
+// MARK: - NSFetchedResultsController
+
+extension SecondViewController: NSFetchedResultsControllerDelegate {
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        dump(sectionInfo)
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        tableView.reloadData()
+    }
+    
+}
+
+
+// MARK: - TableView
+
+extension SecondViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let firstSection = fetchedResultsController.sections?.first else { return 0 }
+        return firstSection.numberOfObjects
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BasicCell", for: indexPath)
+        let drawing = fetchedResultsController.object(at: indexPath)
+        cell.imageView?.image = drawing.image
+        cell.textLabel?.text = drawing.title ?? drawing.createdAtString
+        if drawing.title != nil {
+            cell.detailTextLabel?.text = drawing.createdAtString
+        }
+        return cell
+    }
+    
+}
