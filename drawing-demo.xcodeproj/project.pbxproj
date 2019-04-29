@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CBCF182422763B420064F284 /* DrawingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCF182322763B420064F284 /* DrawingImageView.swift */; };
 		E746F6F92270BAE000ED97C5 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E746F6F82270BAE000ED97C5 /* MainTabBarController.swift */; };
 		E746F6FE2270BBBB00ED97C5 /* FirstViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E746F6FD2270BBBB00ED97C5 /* FirstViewController.storyboard */; };
 		E7A4FB162270BCCA00F1B959 /* SecondViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7A4FB142270BCCA00F1B959 /* SecondViewController.storyboard */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CBCF182322763B420064F284 /* DrawingImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingImageView.swift; sourceTree = "<group>"; };
 		E746F6F82270BAE000ED97C5 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		E746F6FD2270BBBB00ED97C5 /* FirstViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = FirstViewController.storyboard; path = Base.lproj/FirstViewController.storyboard; sourceTree = "<group>"; };
 		E7A4FB152270BCCA00F1B959 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SecondViewController.storyboard; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				E7F3541B2270BD5500612A79 /* ThirdViewController.storyboard */,
+				CBCF182322763B420064F284 /* DrawingImageView.swift */,
 				E7F3541A2270BD5500612A79 /* ThirdViewController.swift */,
 			);
 			path = Third;
@@ -342,6 +345,7 @@
 				E7F354242270BD6100612A79 /* FourthViewController.swift in Sources */,
 				E7AD9BD72270B8D5005B1958 /* SecondViewController.swift in Sources */,
 				E7AD9BD32270B8D5005B1958 /* AppDelegate.swift in Sources */,
+				CBCF182422763B420064F284 /* DrawingImageView.swift in Sources */,
 				E7F3541D2270BD5500612A79 /* ThirdViewController.swift in Sources */,
 				E7AD9BD52270B8D5005B1958 /* FirstViewController.swift in Sources */,
 				E746F6F92270BAE000ED97C5 /* MainTabBarController.swift in Sources */,

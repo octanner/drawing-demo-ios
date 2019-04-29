@@ -11,12 +11,20 @@
 import UIKit
 
 class ThirdViewController: UIViewController {
-
+    
+    @IBOutlet weak var drawingCanvas: DrawingImageView!
+    
+    @IBOutlet weak var clearButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
 
-
+    @IBAction func clearTapped(_ sender: Any) {
+        drawingCanvas.clearCanvas(true)
+    }
+    
 }
+
 
