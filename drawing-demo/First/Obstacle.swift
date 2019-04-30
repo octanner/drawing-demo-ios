@@ -13,7 +13,7 @@ class Obstacle: SKSpriteNode {
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
         super.init(texture: texture, color: color, size: size)
-        physicsBody = SKPhysicsBody(circleOfRadius: size.width / 2)
+        physicsBody = SKPhysicsBody(rectangleOf: size)
         physicsBody?.isDynamic = false
         physicsBody?.categoryBitMask = CategoryMask.badGuy.rawValue
     }

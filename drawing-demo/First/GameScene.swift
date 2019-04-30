@@ -260,7 +260,8 @@ private extension GameScene {
         guard let player = player, !shouldTapToStart else { return }
         let numberOfObstacles = (score / 100) + 1
         if obstacles.count < numberOfObstacles {
-            let obstacle = Obstacle(texture: SKTexture(imageNamed: "obstacle"), color: .red, size: CGSize(width: 70, height: 80))
+            let obstacle = Obstacle(texture: SKTexture(imageNamed: "eraser"), color: .red, size: CGSize(width: 40, height: 80))
+            obstacle.zRotation = CGFloat.random(in: 0...CGFloat.pi)
             addChild(obstacle)
             obstacle.respawn(basedOn: player.position)
             obstacles.append(obstacle)
