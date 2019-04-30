@@ -18,38 +18,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kJd-0m-es1">
+                                <rect key="frame" x="358" y="54" width="36" height="30"/>
+                                <state key="normal" title="Clear">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="clearTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="4ed-WT-hiL"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLc-aZ-6oC">
+                                <rect key="frame" x="10" y="115" width="394" height="61"/>
+                                <string key="text">This view creates a video of drawing and an audio message. Press Record and start drawing and speaking. When finished, press Stop.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jh9-gq-4q4" customClass="DrawingImageView" customModule="drawing_demo" customModuleProvider="target">
-                                <rect key="frame" x="10" y="305.5" width="394" height="285"/>
+                                <rect key="frame" x="10" y="216" width="394" height="285"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="jh9-gq-4q4" secondAttribute="height" multiplier="394:285" id="dbz-da-nUH"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="keyPath" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kJd-0m-es1">
-                                <rect key="frame" x="368" y="54" width="36" height="30"/>
-                                <state key="normal" title="Clear"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n9a-MX-eYU">
+                                <rect key="frame" x="178" y="561" width="58" height="34"/>
+                                <state key="normal" title="Record"/>
                                 <connections>
-                                    <action selector="clearTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="4ed-WT-hiL"/>
+                                    <action selector="recordTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="YK3-AU-IBQ"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="PLc-aZ-6oC" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="11E-Bk-oFA"/>
+                            <constraint firstItem="O1u-W8-tvY" firstAttribute="trailing" secondItem="kJd-0m-es1" secondAttribute="trailing" constant="20" id="Dd1-6e-cbS"/>
+                            <constraint firstItem="O1u-W8-tvY" firstAttribute="trailing" secondItem="PLc-aZ-6oC" secondAttribute="trailing" constant="10" id="HkP-CD-eV0"/>
+                            <constraint firstItem="jh9-gq-4q4" firstAttribute="top" secondItem="PLc-aZ-6oC" secondAttribute="bottom" constant="40" id="KRg-ii-hlp"/>
+                            <constraint firstItem="n9a-MX-eYU" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="Noi-0V-Owl"/>
                             <constraint firstItem="kJd-0m-es1" firstAttribute="top" secondItem="O1u-W8-tvY" secondAttribute="top" constant="10" id="Y1x-qB-Qf6"/>
-                            <constraint firstItem="jh9-gq-4q4" firstAttribute="centerY" secondItem="QS5-Rx-YEW" secondAttribute="centerY" id="Zqi-nf-jSR"/>
+                            <constraint firstItem="jh9-gq-4q4" firstAttribute="centerY" secondItem="QS5-Rx-YEW" secondAttribute="centerY" multiplier="0.8" id="Zqi-nf-jSR"/>
                             <constraint firstItem="jh9-gq-4q4" firstAttribute="leading" secondItem="O1u-W8-tvY" secondAttribute="leading" constant="10" id="bt7-XQ-OMS"/>
-                            <constraint firstItem="O1u-W8-tvY" firstAttribute="trailing" secondItem="kJd-0m-es1" secondAttribute="trailing" constant="10" id="ci7-YL-rwW"/>
                             <constraint firstItem="O1u-W8-tvY" firstAttribute="trailing" secondItem="jh9-gq-4q4" secondAttribute="trailing" constant="10" id="crU-nI-HrB"/>
-                            <constraint firstItem="kJd-0m-es1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="O1u-W8-tvY" secondAttribute="leading" id="eIo-ry-0Et"/>
+                            <constraint firstItem="n9a-MX-eYU" firstAttribute="top" secondItem="jh9-gq-4q4" secondAttribute="bottom" constant="60" id="fWc-Ij-fhB"/>
+                            <constraint firstItem="kJd-0m-es1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="O1u-W8-tvY" secondAttribute="leading" symbolic="YES" id="i4T-kZ-lwH"/>
+                            <constraint firstItem="PLc-aZ-6oC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="O1u-W8-tvY" secondAttribute="leading" id="oeX-h9-pCB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
@@ -58,6 +71,7 @@
                     <connections>
                         <outlet property="clearButton" destination="kJd-0m-es1" id="eNr-sF-nBs"/>
                         <outlet property="drawingCanvas" destination="jh9-gq-4q4" id="p7f-cG-qZi"/>
+                        <outlet property="recordButton" destination="n9a-MX-eYU" id="lCQ-iZ-LuK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
