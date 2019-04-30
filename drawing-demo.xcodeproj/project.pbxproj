@@ -23,6 +23,11 @@
 		A140004322777147001BC883 /* EntityDefining.swift in Sources */ = {isa = PBXBuildFile; fileRef = A140004222777147001BC883 /* EntityDefining.swift */; };
 		A140004922777544001BC883 /* DrawingDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A140004722777544001BC883 /* DrawingDemo.xcdatamodeld */; };
 		A140004B22777719001BC883 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A140004A22777719001BC883 /* CoreDataManager.swift */; };
+		A140004D2278096E001BC883 /* ImageViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A140004C2278096E001BC883 /* ImageViewerViewController.swift */; };
+		A140004F227809BA001BC883 /* ImageViewerViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A140004E227809BA001BC883 /* ImageViewerViewController.storyboard */; };
+		A16C302A2278B4F10020F21C /* UIView+ImageRender.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16C30292278B4F10020F21C /* UIView+ImageRender.swift */; };
+		A16C302C2278CAE80020F21C /* UIColor+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16C302B2278CAE80020F21C /* UIColor+Custom.swift */; };
+		A16C302E2278CB360020F21C /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16C302D2278CB360020F21C /* UIColor+Hex.swift */; };
 		E746F6F92270BAE000ED97C5 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E746F6F82270BAE000ED97C5 /* MainTabBarController.swift */; };
 		E746F6FE2270BBBB00ED97C5 /* FirstViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E746F6FD2270BBBB00ED97C5 /* FirstViewController.storyboard */; };
 		E7AD9BD32270B8D5005B1958 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AD9BD22270B8D5005B1958 /* AppDelegate.swift */; };
@@ -74,6 +79,11 @@
 		A140004222777147001BC883 /* EntityDefining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityDefining.swift; sourceTree = "<group>"; };
 		A140004822777544001BC883 /* DrawingDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DrawingDemo.xcdatamodel; sourceTree = "<group>"; };
 		A140004A22777719001BC883 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		A140004C2278096E001BC883 /* ImageViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerViewController.swift; sourceTree = "<group>"; };
+		A140004E227809BA001BC883 /* ImageViewerViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ImageViewerViewController.storyboard; sourceTree = "<group>"; };
+		A16C30292278B4F10020F21C /* UIView+ImageRender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ImageRender.swift"; sourceTree = "<group>"; };
+		A16C302B2278CAE80020F21C /* UIColor+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Custom.swift"; sourceTree = "<group>"; };
+		A16C302D2278CB360020F21C /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		E746F6F82270BAE000ED97C5 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		E746F6FD2270BBBB00ED97C5 /* FirstViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = FirstViewController.storyboard; path = Base.lproj/FirstViewController.storyboard; sourceTree = "<group>"; };
 		E7AD9BCF2270B8D5005B1958 /* drawing-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "drawing-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,11 +137,16 @@
 			children = (
 				A140002022776DD5001BC883 /* CoreDataStack.swift */,
 				A140004022776FD8001BC883 /* Drawing.swift */,
+				A140004C2278096E001BC883 /* ImageViewerViewController.swift */,
+				A140004E227809BA001BC883 /* ImageViewerViewController.storyboard */,
 				A140004A22777719001BC883 /* CoreDataManager.swift */,
 				A140004722777544001BC883 /* DrawingDemo.xcdatamodeld */,
 				A140004222777147001BC883 /* EntityDefining.swift */,
 				A140002122776DD5001BC883 /* SecondViewController.storyboard */,
 				A140002522776DD5001BC883 /* SecondViewController.swift */,
+				A16C30292278B4F10020F21C /* UIView+ImageRender.swift */,
+				A16C302B2278CAE80020F21C /* UIColor+Custom.swift */,
+				A16C302D2278CB360020F21C /* UIColor+Hex.swift */,
 				A140002D22776EA0001BC883 /* SpeedSketch */,
 			);
 			path = Second;
@@ -362,6 +377,7 @@
 				A140002822776DD5001BC883 /* SecondViewController.storyboard in Resources */,
 				E746F6FE2270BBBB00ED97C5 /* FirstViewController.storyboard in Resources */,
 				E7AD9BDF2270B8D6005B1958 /* LaunchScreen.storyboard in Resources */,
+				A140004F227809BA001BC883 /* ImageViewerViewController.storyboard in Resources */,
 				E7F3541E2270BD5500612A79 /* ThirdViewController.storyboard in Resources */,
 				E7F3542A2270BD6E00612A79 /* FifthViewController.storyboard in Resources */,
 				E7AD9BDC2270B8D6005B1958 /* Assets.xcassets in Resources */,
@@ -390,6 +406,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A16C302A2278B4F10020F21C /* UIView+ImageRender.swift in Sources */,
 				A140003A22776EF2001BC883 /* CGDrawingEngine.swift in Sources */,
 				A140004922777544001BC883 /* DrawingDemo.xcdatamodeld in Sources */,
 				A140003722776EF2001BC883 /* RingView.swift in Sources */,
@@ -398,12 +415,15 @@
 				A140003D22776EF2001BC883 /* RingControl.swift in Sources */,
 				E7F354242270BD6100612A79 /* FourthViewController.swift in Sources */,
 				A140003E22776EF2001BC883 /* StrokeGestureRecognizer.swift in Sources */,
+				A16C302E2278CB360020F21C /* UIColor+Hex.swift in Sources */,
 				A140003822776EF2001BC883 /* StrokeCollection.swift in Sources */,
+				A140004D2278096E001BC883 /* ImageViewerViewController.swift in Sources */,
 				A140002A22776DD5001BC883 /* SecondViewController.swift in Sources */,
 				A140003F22776EF2001BC883 /* CanvasMainViewController.swift in Sources */,
 				E7AD9BD32270B8D5005B1958 /* AppDelegate.swift in Sources */,
 				A140004322777147001BC883 /* EntityDefining.swift in Sources */,
 				E7F3541D2270BD5500612A79 /* ThirdViewController.swift in Sources */,
+				A16C302C2278CAE80020F21C /* UIColor+Custom.swift in Sources */,
 				E7AD9BD52270B8D5005B1958 /* FirstViewController.swift in Sources */,
 				A140004122776FD8001BC883 /* Drawing.swift in Sources */,
 				E746F6F92270BAE000ED97C5 /* MainTabBarController.swift in Sources */,

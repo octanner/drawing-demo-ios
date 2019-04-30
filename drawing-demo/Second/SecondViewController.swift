@@ -26,17 +26,21 @@ class SecondViewController: UIViewController {
         frc.delegate = self
         return frc
     }()
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         try? fetchedResultsController.performFetch()
     }
 
+    func showImageViewer(for drawing: Drawing) {
+        let storyboard = UIStoryboard(name: "ImageViewerViewController", bundle: nil)
+        guard let imageViewerNav = storyboard.instantiateInitialViewController() as? UINavigationController, let imageViewer = imageViewerNav.viewControllers.first as? ImageViewerViewController else { return }
+        modalPresentationStyle = .formSheet
+        imageViewer.loadViewIfNeeded()
+        imageViewer.image = drawing.image
+        present(imageViewerNav, animated: true, completion: nil)
+    }
+    
 }
 
 
@@ -73,6 +77,16 @@ extension SecondViewController: UITableViewDataSource {
             cell.detailTextLabel?.text = drawing.createdAtString
         }
         return cell
+    }
+    
+}
+
+extension SecondViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let drawing = fetchedResultsController.object(at: indexPath)
+        showImageViewer(for: drawing)
     }
     
 }

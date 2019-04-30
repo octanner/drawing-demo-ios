@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Zon-6k-aKP">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Image Viewer View Controller-->
+        <scene sceneID="i46-aC-47a">
+            <objects>
+                <viewController id="6Wp-l8-Kpn" customClass="ImageViewerViewController" customModule="drawing_demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZJf-nU-e35">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dgy-hR-R1W">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="8Z5-8p-xPK" appends="YES" id="urC-cy-Mnl"/>
+                                </connections>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dgy-hR-R1W" firstAttribute="leading" secondItem="ovr-yw-If0" secondAttribute="leading" id="4Ji-MO-Adx"/>
+                            <constraint firstItem="ovr-yw-If0" firstAttribute="bottom" secondItem="dgy-hR-R1W" secondAttribute="bottom" id="Xo2-Ag-ITu"/>
+                            <constraint firstItem="dgy-hR-R1W" firstAttribute="top" secondItem="ovr-yw-If0" secondAttribute="top" id="sbo-x2-jZA"/>
+                            <constraint firstItem="dgy-hR-R1W" firstAttribute="trailing" secondItem="ovr-yw-If0" secondAttribute="trailing" id="suo-Hv-zXU"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ovr-yw-If0"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="DM8-r4-mn0">
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="done" id="aji-g5-drs">
+                            <connections>
+                                <action selector="donePressed:" destination="6Wp-l8-Kpn" id="vMv-D3-CA3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="dgy-hR-R1W" id="K9Y-B7-5Zn"/>
+                        <outlet property="pinchRecognizer" destination="8Z5-8p-xPK" id="Ux7-Ow-0cC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fhp-5e-nMD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer id="8Z5-8p-xPK">
+                    <connections>
+                        <action selector="pinched:" destination="6Wp-l8-Kpn" id="AJh-ia-MWi"/>
+                    </connections>
+                </pinchGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1137.68115942029" y="-42.1875"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="4MG-6L-kZ4">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Zon-6k-aKP" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Hk4-GT-fpW">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="6Wp-l8-Kpn" kind="relationship" relationship="rootViewController" id="NSi-5u-EtU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8zB-jv-Ani" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="227.536231884058" y="-42.1875"/>
+        </scene>
+    </scenes>
+</document>

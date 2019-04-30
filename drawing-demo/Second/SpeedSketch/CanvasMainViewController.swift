@@ -9,27 +9,87 @@ import UIKit
 
 class CanvasMainViewController: UIViewController {
 
+    enum ColorType {
+        case black
+        case red
+        case blue
+        
+        var color: UIColor {
+            switch self {
+            case .black:
+                return .darkBlack
+            case .red:
+                return .darkRed
+            case .blue:
+                return .darkBlue
+            }
+        }
+    }
+    
     var cgView: StrokeCGView!
-    @IBOutlet var leftRingControl: RingControl!
-    @IBOutlet var leftRingControlHeight: NSLayoutConstraint!
-    @IBOutlet var leftRingControlWidth: NSLayoutConstraint!
-    @IBOutlet var leftRingControlLeading: NSLayoutConstraint!
-    @IBOutlet var leftRingControlTop: NSLayoutConstraint!
 
     var fingerStrokeRecognizer: StrokeGestureRecognizer!
     var pencilStrokeRecognizer: StrokeGestureRecognizer!
 
     @IBOutlet var pencilButton: UIButton!
     @IBOutlet var scrollView: UIScrollView!
-    @IBOutlet var separatorView: UIView!
-
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
+    @IBOutlet var saveButton: UIBarButtonItem!
+    @IBOutlet weak var upDownButton: UIButton!
+    @IBOutlet var palletView: UIView!
+    
+    @IBOutlet weak var blackColorButton: UIButton!
+    @IBOutlet weak var redColorButton: UIButton!
+    @IBOutlet weak var blueColorButton: UIButton!
+    @IBOutlet weak var sizeView: UIView!
+    @IBOutlet weak var sizeSlider: UISlider!
+    
+    @IBOutlet weak var undoButton: UIButton!
+    @IBOutlet weak var redoButton: UIButton!
+    
+    
     var strokeCollection = StrokeCollection()
     var canvasContainerView: CanvasContainerView!
 
+    var undidStrokes = [Stroke]()
+    var previousColor = ColorType.black
+    var currentColor = ColorType.black {
+        didSet {
+            guard currentColor != oldValue else { return }
+            previousColor = oldValue
+            fingerStrokeRecognizer.color = currentColor.color.cgColor
+            pencilStrokeRecognizer.color = currentColor.color.cgColor
+            updateColorButtons()
+        }
+    }
+    private var previousStrokeWidth: CGFloat = 1
+    private var writtenWidth: CGFloat = 0.5 {
+        didSet {
+            guard writtenWidth != oldValue else { return }
+            previousStrokeWidth = oldValue
+        }
+    }
+    private var currentStrokeWidth: CGFloat = 0.5 {
+        didSet {
+            fingerStrokeRecognizer.lineWidth = currentStrokeWidth
+            pencilStrokeRecognizer.lineWidth = currentStrokeWidth
+            updateSizeView()
+        }
+    }
+    private var palletIsCollapsed = false {
+        didSet {
+            guard palletIsCollapsed != oldValue else { return }
+            updatePallet()
+        }
+    }
+    
+    
     /// Prepare the drawing canvas.
     /// - Tag: CanvasMainViewController-viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.leftBarButtonItems = [cancelButton]
+        setUpColorButtons()
         let screenBounds = UIScreen.main.bounds
         let maxScreenDimension = max(screenBounds.width, screenBounds.height)
 
@@ -56,13 +116,10 @@ class CanvasMainViewController: UIViewController {
         self.fingerStrokeRecognizer = setupStrokeGestureRecognizer(isForPencil: false)
         self.pencilStrokeRecognizer = setupStrokeGestureRecognizer(isForPencil: true)
 
-        if #available(iOS 12.1, *) {
-            let pencilInteraction = UIPencilInteraction()
-            pencilInteraction.delegate = self
-            view.addInteraction(pencilInteraction)
-        }
+        let pencilInteraction = UIPencilInteraction()
+        pencilInteraction.delegate = self
+        view.addInteraction(pencilInteraction)
 
-        setupDrawingTools()
         setupPencilUI()
     }
 
@@ -86,46 +143,31 @@ class CanvasMainViewController: UIViewController {
         recognizer.isForPencil = isForPencil
         return recognizer
     }
-
-    func setupDrawingTools() {
-        let ringDiameter = CGFloat(74.0)
-        let ringImageInset = CGFloat(14.0)
-        let borderWidth = CGFloat(1.0)
-        let ringOutset = ringDiameter / 2.0 - (floor(sqrt((ringDiameter * ringDiameter) / 8.0) - borderWidth))
-
-        leftRingControlHeight.constant = ringDiameter
-        leftRingControlWidth.constant = ringDiameter
-        leftRingControlTop.constant = -ringDiameter + (ringOutset * 2)
-        leftRingControlLeading.constant = -ringOutset
-
-        leftRingControl.setupRings(itemCount: StrokeViewDisplayOptions.allCases.count)
-        leftRingControl.setupInitialSelectionState()
-
-        for (index, ringView) in leftRingControl.ringViews.enumerated() {
-            let option = StrokeViewDisplayOptions.allCases[index]
-            ringView.actionClosure = { self.cgView.displayOptions = option }
-            let imageView = UIImageView(frame: ringView.bounds.insetBy(dx: ringImageInset, dy: ringImageInset))
-            imageView.image = UIImage(named: option.description)
-            imageView.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin, .flexibleTopMargin, .flexibleBottomMargin]
-            ringView.addSubview(imageView)
-        }
-    }
     
     func receivedAllUpdatesForStroke(_ stroke: Stroke) {
         cgView.setNeedsDisplay(for: stroke)
         stroke.clearUpdateInfo()
     }
+    
+    var canvasIsBlank = true {
+        didSet {
+            guard canvasIsBlank != oldValue else { return }
+            navigationItem.leftBarButtonItems = canvasIsBlank ? [cancelButton] : [cancelButton, saveButton]
+        }
+    }
 
     @IBAction func clearButtonAction(_ sender: AnyObject) {
         self.strokeCollection = StrokeCollection()
         cgView.strokeCollection = self.strokeCollection
+        canvasIsBlank = true
+        undidStrokes = []
+        updateUndoRedoButtons()
     }
 
     /// Handles the gesture for `StrokeGestureRecognizer`.
     /// - Tag: strokeUpdate
     @objc
     func strokeUpdated(_ strokeGesture: StrokeGestureRecognizer) {
-        
         if strokeGesture === pencilStrokeRecognizer {
             lastSeenPencilInteraction = Date()
         }
@@ -136,7 +178,6 @@ class CanvasMainViewController: UIViewController {
             if strokeGesture.state == .began ||
                (strokeGesture.state == .ended && strokeCollection.activeStroke == nil) {
                 strokeCollection.activeStroke = stroke
-                leftRingControl.cancelInteraction()
             }
         } else {
             strokeCollection.activeStroke = nil
@@ -155,6 +196,9 @@ class CanvasMainViewController: UIViewController {
         }
 
         cgView.strokeCollection = strokeCollection
+        canvasIsBlank = strokeCollection.strokes.isEmpty
+        writtenWidth = currentStrokeWidth
+        updateUndoRedoButtons()
     }
 
     // MARK: Pencil Recognition and UI Adjustments
@@ -220,21 +264,67 @@ class CanvasMainViewController: UIViewController {
         lastSeenPencilInteraction = nil
         pencilMode = false
     }
+    
+    @IBAction func cancel(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func palletButtonPressed() {
+        palletIsCollapsed.toggle()
+    }
+    
+    @IBAction func save(_ sender: Any) {
+        let image = canvasContainerView.canvasView.asImage
+        guard let data = image.pngData() else { return }
+        CoreDataManager.shared.addDrawing(data: data)
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func blackColorPressed() {
+        currentColor = .black
+    }
 
+    @IBAction func redColorPressed() {
+        currentColor = .red
+    }
+
+    @IBAction func blueColorPressed() {
+        currentColor = .blue
+    }
+    
+    @IBAction func slid(_ sender: UISlider) {
+        currentStrokeWidth = CGFloat(sender.value)
+    }
+    
+    @IBAction func undoPressed(_ sender: Any) {
+        guard !strokeCollection.strokes.isEmpty else { return }
+        let deletedStroke = strokeCollection.strokes.removeLast()
+        undidStrokes.append(deletedStroke)
+        cgView.strokeCollection = strokeCollection
+        cgView.setNeedsDisplay()
+        updateUndoRedoButtons()
+    }
+    
+    @IBAction func redoPressed(_ sender: Any) {
+        guard let redidStroke = undidStrokes.last else { return }
+        strokeCollection.strokes.append(redidStroke)
+        undidStrokes.removeLast()
+        cgView.strokeCollection = strokeCollection
+        cgView.setNeedsDisplay()
+        updateUndoRedoButtons()
+    }
+    
+    func updateUndoRedoButtons() {
+        canvasIsBlank = strokeCollection.strokes.isEmpty
+        undoButton.isEnabled = !canvasIsBlank
+        redoButton.isEnabled = !undidStrokes.isEmpty
+    }
+    
 }
 
 // MARK: - UIGestureRecognizerDelegate
 
 extension CanvasMainViewController: UIGestureRecognizerDelegate {
-
-    // Since our gesture recognizer is beginning immediately, we do the hit test ambiguation here
-    // instead of adding failure requirements to the gesture for minimizing the delay
-    // to the first action sent and therefore the first lines drawn.
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-
-        return leftRingControl.hitTest(touch.location(in: leftRingControl), with: nil) == nil
-        
-    }
 
     // We want the pencil to recognize simultaniously with all others.
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
@@ -279,9 +369,64 @@ extension CanvasMainViewController: UIPencilInteractionDelegate {
     /// Handles double taps that the user makes on an Apple Pencil.
     /// - Tag: pencilInteractionDidTap
     func pencilInteractionDidTap(_ interaction: UIPencilInteraction) {
-        if UIPencilInteraction.preferredTapAction == .switchPrevious {
-            leftRingControl.switchToPreviousTool()
+        switch UIPencilInteraction.preferredTapAction {
+        case .showColorPalette:
+            palletIsCollapsed.toggle()
+        case .switchPrevious:
+            palletIsCollapsed = false
+            switchToPrevious()
+        default:
+            break
         }
     }
 
+}
+
+// Private
+
+private extension CanvasMainViewController {
+    
+    func setUpColorButtons() {
+        blackColorButton.backgroundColor = ColorType.black.color
+        redColorButton.backgroundColor = ColorType.red.color
+        blueColorButton.backgroundColor = ColorType.blue.color
+        sizeView.backgroundColor = currentColor.color
+        
+        blackColorButton.layer.cornerRadius = blackColorButton.frame.height / 2
+        redColorButton.layer.cornerRadius = redColorButton.frame.height / 2
+        blueColorButton.layer.cornerRadius = blueColorButton.frame.height / 2
+        blueColorButton.layer.cornerRadius = blueColorButton.frame.height / 2
+        sizeView.layer.cornerRadius = sizeView.frame.size.height / 2
+        updateColorButtons()
+    }
+    
+    func updateColorButtons() {
+        let selectedTransform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        blackColorButton.transform = currentColor == .black ? selectedTransform : .identity
+        redColorButton.transform = currentColor == .red ? selectedTransform : .identity
+        blueColorButton.transform = currentColor == .blue ? selectedTransform : .identity
+        sizeView.backgroundColor = currentColor.color
+    }
+    
+    func updatePallet() {
+        UIView.animate(withDuration: 0.25) {
+            let arrowTransform = self.palletIsCollapsed ? CGAffineTransform(rotationAngle: CGFloat.pi + 0.01) : .identity
+            self.upDownButton.imageView?.transform = arrowTransform
+            self.palletView.isHidden = self.palletIsCollapsed
+        }
+    }
+    
+    func updateSizeView() {
+        let scale = currentStrokeWidth * 1.5
+        sizeView.transform = CGAffineTransform.identity.scaledBy(x: scale, y: scale)
+        if sizeSlider.value != Float(currentStrokeWidth) {
+            sizeSlider.setValue(Float(currentStrokeWidth), animated: true)
+        }
+    }
+    
+    func switchToPrevious() {
+        currentColor = previousColor
+        currentStrokeWidth = previousStrokeWidth
+    }
+    
 }

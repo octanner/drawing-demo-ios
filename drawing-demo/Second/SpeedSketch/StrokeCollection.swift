@@ -40,6 +40,8 @@ struct StrokeSample {
     var estimatedPropertiesExpectingUpdates: UITouch.Properties = []
     var altitude: CGFloat?
     var azimuth: CGFloat?
+    var color: CGColor
+    var lineWidth: CGFloat
     
     var azimuthUnitVector: CGVector {
         var vector = CGVector(dx: 1.0, dy: 0.0)
@@ -56,6 +58,8 @@ struct StrokeSample {
          force: CGFloat? = nil,
          azimuth: CGFloat? = nil,
          altitude: CGFloat? = nil,
+         color: CGColor,
+         width: CGFloat,
          estimatedProperties: UITouch.Properties = [],
          estimatedPropertiesExpectingUpdates: UITouch.Properties = []) {
 
@@ -66,6 +70,8 @@ struct StrokeSample {
         self.predicted = predicted
         self.altitude = altitude
         self.azimuth = azimuth
+        self.color = color
+        self.lineWidth = width
     }
 
     /// Convenience accessor returns a non-optional (Default: 1.0)

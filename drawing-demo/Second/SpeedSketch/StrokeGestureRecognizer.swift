@@ -29,6 +29,8 @@ class StrokeGestureRecognizer: UIGestureRecognizer {
 
     // MARK: - Data
     var stroke = Stroke()
+    var color: CGColor = UIColor.black.cgColor
+    var lineWidth: CGFloat = 0.5
     var outstandingUpdateIndexes = [Int: (Stroke, Int)]()
     var coordinateSpaceView: UIView?
 
@@ -118,7 +120,9 @@ class StrokeGestureRecognizer: UIGestureRecognizer {
                                   location: location,
                                   coalesced: coalesced,
                                   predicted: predicted,
-                                  force: self.collectForce ? touch.force : nil)
+                                  force: self.collectForce ? touch.force : nil,
+                                  color: color,
+                                  width: lineWidth)
 
         if touch.type == .pencil {
             let estimatedProperties = touch.estimatedProperties
