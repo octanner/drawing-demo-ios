@@ -66,13 +66,15 @@ class DrawingImageView: UIImageView {
         image = UIGraphicsGetImageFromCurrentImageContext()
         
         if let drawnImage = image {
-//            images.append(drawnImage)
+//            images.append(drawnImage) // memory nightmare
             
             if times.count == 0 {
                 startTime = Date()
             }
             let timing: Double = Double(times.count) == 0 ? 0 : Date().timeIntervalSince(startTime)
             times.append(timing)
+            
+            // This is the alternative to the images in memory
             writeImageFile(imageToWrite: drawnImage, number: times.count)
             
             delegate?.didUpdateImages(with: images, times: times)
@@ -124,12 +126,18 @@ class DrawingImageView: UIImageView {
     
     // MARK: - File Methods
     
+    
+    /// Saves a UIImage to file
+    ///
+    /// - Parameters:
+    ///   - imageToWrite: UIImage
+    ///   - number: used to name the image uniquely in sequence
     func writeImageFile(imageToWrite: UIImage, number: Int) {
         DispatchQueue.global(qos: .background).async {
             let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
             if let filePath = paths.first?.appendingPathComponent("drawing\(number).jpg") {
                 do {
-                    // PNG files are much bigger
+                    // PNG files are much bigger and better. To save memory, we are pulling down the quality
 //                    try imageToWrite.pngData()?.write(to: filePath, options: .atomic)
                     try imageToWrite.jpegData(compressionQuality: 0.1)?.write(to: filePath, options: .atomic)
                 } catch {

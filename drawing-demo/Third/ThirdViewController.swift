@@ -20,17 +20,25 @@ class ThirdViewController: UIViewController {
     @IBOutlet weak var clearButton: UIButton!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var progressLabel: UILabel!
+    @IBOutlet weak var videoProgressView: UIProgressView!
+   
+    /// Permission to save to photo library
+    var canSave: Bool = false
+    
+    // Value of progress segment based on audio duration
+    var estimatedProgressStep: Float = 0
+    
+    /// Estimation of duration to processing time, highly subjective
+    var estimatedProcessing: Double = 8
+    var timer: Timer?
     
     // AVFoundation
     var recordingSession: AVAudioSession!
     var audioRecorder: AVAudioRecorder!
-    var canSave: Bool = false
     
     // Image properties
-    var images = [UIImage]()
-    var times = [TimeInterval]()
-    var lastImageNumber: Int = 0
-    
+    var images = [UIImage]()        // The usage on this has changed a bit, due to memory concerns
+    var times = [TimeInterval]()    // Wanted to be used for exact drawing timing in video
     
     // MARK: Life Cycle
     
@@ -54,9 +62,7 @@ class ThirdViewController: UIViewController {
 
     @IBAction func clearTapped(_ sender: Any) {
         drawingCanvas.clearCanvas(animated: true)
-        self.progressLabel.text = nil
-        self.recordButton.isEnabled = true
-        self.recordButton.isHidden = false
+        showRecordingUI(false)
         clearFiles()
     }
     
@@ -64,9 +70,7 @@ class ThirdViewController: UIViewController {
         if audioRecorder == nil {
             startAudioRecording()
         } else {
-            self.recordButton.isEnabled = false
-            self.recordButton.isHidden = true
-            self.progressLabel.text = "Processing files..."
+            showRecordingUI(true)
             finishAudioRecording(success: true)
         }
     }
@@ -75,13 +79,14 @@ class ThirdViewController: UIViewController {
 
 extension ThirdViewController {
     
-    ///
+    /// Visal component setup
     func configureButtons() {
         let recordImage = imageOfRecord(imageSize: recordButton.frame.size)
         recordButton.setBackgroundImage(recordImage, for: .normal)
         recordButton.setBackgroundImage(recordImage, for: .disabled)
     }
     
+    /// Make sure we obey the Photo Library gods
     func configurePhotoLibraryPermissions() {
         PHPhotoLibrary.requestAuthorization({
             (newStatus) in
@@ -91,7 +96,7 @@ extension ThirdViewController {
         })
     }
     
-    ///Paintcode goodness!
+    /// A red circle
     func drawRecord(frame: CGRect = CGRect(x: 0, y: 0, width: 23, height: 23)) {
         //// Color Declarations
         let color = UIColor(red: 0.841, green: 0.001, blue: 0.001, alpha: 1.000)
@@ -102,6 +107,7 @@ extension ThirdViewController {
         ovalPath.fill()
     }
     
+    /// Returns a UIImage of a red circle
     func imageOfRecord(imageSize: CGSize = CGSize(width: 23, height: 23)) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(imageSize, false, 0)
         drawRecord(frame: CGRect(x: 0, y: 0, width: imageSize.width, height: imageSize.height))
@@ -110,6 +116,30 @@ extension ThirdViewController {
         UIGraphicsEndImageContext()
         
         return imageOfRecord
+    }
+    
+    
+    /// Control UI elements shown during recording
+    ///
+    /// - Parameter isShown: set to `true` means we see progress and text, `false` shows the record button
+    func showRecordingUI(_ isShown: Bool) {
+        DispatchQueue.main.async {
+            self.progressLabel.text = isShown ? "Processing files..." : nil
+            self.recordButton.isHidden = isShown
+            self.recordButton.isEnabled = !isShown
+            self.videoProgressView.isHidden = !isShown
+            self.videoProgressView.progress = 0
+            if !isShown {
+                self.timer?.invalidate()
+            }
+        }
+    }
+    
+    /// Updates the progress bar from a timer
+    @objc func updateProgress() {
+        DispatchQueue.main.async {
+            self.videoProgressView.progress += self.estimatedProgressStep
+        }
     }
     
     /// Removes all files from the documents directory
@@ -163,6 +193,7 @@ extension ThirdViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
+    /// Fires up an audio recorder
     func startAudioRecording() {
         let audioFilename = audioFileURL()
         
@@ -203,6 +234,7 @@ extension ThirdViewController {
     
     // MARK: - Video Methods
     
+    /// Combines the audio recording with the saved drawing images.
     func createVideo() {
         
         // This is where I started, but I wasn't able to finish in time, so I used some open source. Blah!
@@ -212,16 +244,12 @@ extension ThirdViewController {
         //        }
         //    }
         
-        images.removeAll()  // reset array
-        DispatchQueue.main.async {
-            self.recordButton.isEnabled = false
-            self.recordButton.isHidden = true
-            self.progressLabel.text = "Processing files..."
-        }
+        images.removeAll()  // reset array, which has changed its use and timing a few times
+        showRecordingUI(true)
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         if let filePath = paths.first?.appendingPathComponent("drawing\(times.count).jpg") {
             while UIImage(contentsOfFile: filePath.path) == nil {
-                // This is dangerous! Wait for the last image file to be done.
+                // This is dangerous! Wait for the last image file to be done writing.
 //                debugPrint("Not ready yet! drawing\(times.count).jpg")
             }
         }
@@ -230,6 +258,7 @@ extension ThirdViewController {
             self.progressLabel.text = "Creating new video with your drawing and voice. Please be patient. This can take a few minutes."
         }
         
+        // Because of memory issues of keeping all those images around, I'm saving images to file, so we don't crash.
         for i in 1...times.count {
             if let filePath = paths.first?.appendingPathComponent("drawing\(i).jpg"), let image = UIImage(contentsOfFile: filePath.path) {
                 images.append(image)
@@ -237,33 +266,41 @@ extension ThirdViewController {
                 debugPrint("Could not load drawing\(i).png")
             }
         }
-        debugPrint("We have \(images.count) images out of \(times.count) possible")
+//        debugPrint("We have \(images.count) images out of \(times.count) possible")
+        
+        // I wanted to use my own, but it was taking too long. Not happy about its linear drawing timing
         VideoGenerator.current.fileName = "drawing"
         VideoGenerator.current.shouldOptimiseImageForVideo = true
         VideoGenerator.current.videoBackgroundColor = .white
         VideoGenerator.current.videoImageWidthForMultipleVideoGeneration = 400  // bigger video means more memory
+        
+        // Grab our audio file, and get estimated progress numbers forit
         let audioURL = audioFileURL()
+        let audioAsset = AVURLAsset.init(url: audioURL, options: nil)
+        let duration = audioAsset.duration.seconds
+        self.estimatedProgressStep = Float(duration) / 600
+        timer = Timer.scheduledTimer(timeInterval: duration/estimatedProcessing, target: self, selector: #selector(updateProgress), userInfo: nil, repeats: true)
         
         VideoGenerator.current.generate(withImages: images, andAudios: [audioURL], andType: .singleAudioMultipleImage, { (progress) in
-            debugPrint("progress: \(progress)")
+//            debugPrint("progress: \(progress)")
+            // This progress is really kinda useless! It's so fast it means nothing except we are almost done.
             DispatchQueue.main.async {
                 self.progressLabel.text = "Finalizing video..."
             }
             
         }, success: { (sURL) in
-            debugPrint("done")
+//            debugPrint("done")
             self.images.removeAll()
             DispatchQueue.main.async {
-                self.progressLabel.text = nil
-                self.recordButton.isEnabled = true
-                self.recordButton.isHidden = false
-                
+                self.showRecordingUI(false)
+                // Copies our local video into the photo library if we gave our app permission
                 if let videoFilePath = paths.first?.appendingPathComponent("drawing.m4v") {
                     if self.canSave {
                         PHPhotoLibrary.shared().performChanges({
                             PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoFilePath)
                         }) { saved, error in
                             if saved {
+                                // What the heck, give some in your face success
                                 let alertController = UIAlertController(title: "Your video was successfully saved to your photo library.", message: nil, preferredStyle: .alert)
                                 let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                                 alertController.addAction(defaultAction)
@@ -271,6 +308,7 @@ extension ThirdViewController {
                             }
                         }
                     } else {
+                        // This user does not deserve a video, let's be honest.
                         let alertController = UIAlertController(title: "Cannot Save Video", message: "You need to give permission to your photo library in Settings.", preferredStyle: .alert)
                         let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
                         alertController.addAction(defaultAction)
@@ -279,11 +317,13 @@ extension ThirdViewController {
                 }
             }
         }) { (error) in
-            debugPrint("error!")
+//            debugPrint("error!")
             self.images.removeAll()
-            self.progressLabel.text = nil
-            self.recordButton.isEnabled = true
-            self.recordButton.isHidden = false
+            self.showRecordingUI(false)
+            let alertController = UIAlertController(title: "Error", message: "Something went wrong when creating the video. Please try again.", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(defaultAction)
+            self.present(alertController, animated: true, completion: nil)
         }
     }
 }

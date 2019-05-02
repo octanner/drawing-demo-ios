@@ -29,7 +29,7 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLc-aZ-6oC">
                                 <rect key="frame" x="40" y="106" width="1286" height="41"/>
-                                <string key="text">This view creates a video of drawing and an audio message. Press Record and start drawing and speaking. Use a finger or Apple pencil (or both) to draw. Try to keep it under 12 seconds to save processing time, which is a minute or two. When finished, press Stop.</string>
+                                <string key="text">This view creates a video of drawing and an audio message. Press Record and start drawing and speaking. Use a finger or Apple pencil (or both) to draw. Each tens seconds will take a minute to create. When finished, press Stop.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -58,6 +58,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="NHU-Ey-gXf">
+                                <rect key="frame" x="315" y="907.5" width="736" height="4"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="4" id="6HN-8r-9Yy"/>
+                                </constraints>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -67,8 +73,11 @@
                             <constraint firstItem="O1u-W8-tvY" firstAttribute="trailing" secondItem="kJd-0m-es1" secondAttribute="trailing" constant="20" id="Dd1-6e-cbS"/>
                             <constraint firstItem="O1u-W8-tvY" firstAttribute="trailing" secondItem="PLc-aZ-6oC" secondAttribute="trailing" constant="40" id="HkP-CD-eV0"/>
                             <constraint firstItem="n9a-MX-eYU" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="Noi-0V-Owl"/>
+                            <constraint firstItem="NHU-Ey-gXf" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="OSl-k9-qIT"/>
+                            <constraint firstItem="NHU-Ey-gXf" firstAttribute="width" secondItem="jh9-gq-4q4" secondAttribute="width" multiplier="0.6" id="SYy-0m-mJd"/>
                             <constraint firstItem="h3O-ct-De0" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="VvL-cS-rSz"/>
                             <constraint firstItem="kJd-0m-es1" firstAttribute="top" secondItem="O1u-W8-tvY" secondAttribute="top" constant="10" id="Y1x-qB-Qf6"/>
+                            <constraint firstItem="NHU-Ey-gXf" firstAttribute="top" secondItem="h3O-ct-De0" secondAttribute="bottom" constant="10" id="ZPt-b5-R2e"/>
                             <constraint firstItem="jh9-gq-4q4" firstAttribute="centerY" secondItem="QS5-Rx-YEW" secondAttribute="centerY" id="Zqi-nf-jSR"/>
                             <constraint firstItem="jh9-gq-4q4" firstAttribute="leading" secondItem="O1u-W8-tvY" secondAttribute="leading" constant="70" id="bt7-XQ-OMS"/>
                             <constraint firstItem="O1u-W8-tvY" firstAttribute="trailing" secondItem="jh9-gq-4q4" secondAttribute="trailing" constant="70" id="crU-nI-HrB"/>
@@ -87,6 +96,7 @@
                         <outlet property="drawingCanvas" destination="jh9-gq-4q4" id="p7f-cG-qZi"/>
                         <outlet property="progressLabel" destination="h3O-ct-De0" id="6hf-X1-Oeu"/>
                         <outlet property="recordButton" destination="n9a-MX-eYU" id="lCQ-iZ-LuK"/>
+                        <outlet property="videoProgressView" destination="NHU-Ey-gXf" id="7yi-Kl-uZk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
