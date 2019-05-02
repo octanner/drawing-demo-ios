@@ -44,6 +44,12 @@ class ThirdViewController: UIViewController {
         configurePhotoLibraryPermissions()
     }
     
+    override func didReceiveMemoryWarning() {
+        // If crap hits the fan on memory, stop the recording
+        recordTapped(self)
+        debugPrint("Ran out of memory, stopping recording.")
+    }
+    
     // MARK: - IBActions
 
     @IBAction func clearTapped(_ sender: Any) {
