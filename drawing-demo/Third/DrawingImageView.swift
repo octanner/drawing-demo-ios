@@ -11,6 +11,8 @@ import UIKit
 
 protocol DrawingImageViewDelegate {
     func didHaveDrawingError()
+    func didUpdateImages(with images: [UIImage], times: [TimeInterval])
+
 }
 
 /// Draws an image
@@ -28,6 +30,8 @@ class DrawingImageView: UIImageView {
     
     // Image properties
     var images = [UIImage]()
+    var times = [TimeInterval]()
+    var startTime = Date()
     
     override func awakeFromNib() {
         layer.borderColor = UIColor.black.cgColor
@@ -62,8 +66,16 @@ class DrawingImageView: UIImageView {
         image = UIGraphicsGetImageFromCurrentImageContext()
         
         if let drawnImage = image {
-            images.append(drawnImage)
-            writeImageFile(imageToWrite: drawnImage, number: images.count)
+//            images.append(drawnImage)
+            
+            if times.count == 0 {
+                startTime = Date()
+            }
+            let timing: Double = Double(times.count) == 0 ? 0 : Date().timeIntervalSince(startTime)
+            times.append(timing)
+            writeImageFile(imageToWrite: drawnImage, number: times.count)
+            
+            delegate?.didUpdateImages(with: images, times: times)
         }
         UIGraphicsEndImageContext()
     }
@@ -107,6 +119,7 @@ class DrawingImageView: UIImageView {
             image = nil
         }
         images.removeAll()
+        times.removeAll()
     }
     
     // MARK: - File Methods
@@ -114,9 +127,11 @@ class DrawingImageView: UIImageView {
     func writeImageFile(imageToWrite: UIImage, number: Int) {
         DispatchQueue.global(qos: .background).async {
             let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-            if let filePath = paths.first?.appendingPathComponent("drawing\(number).png") {
+            if let filePath = paths.first?.appendingPathComponent("drawing\(number).jpg") {
                 do {
-                    try imageToWrite.pngData()?.write(to: filePath, options: .atomic)
+                    // PNG files are much bigger
+//                    try imageToWrite.pngData()?.write(to: filePath, options: .atomic)
+                    try imageToWrite.jpegData(compressionQuality: 0.1)?.write(to: filePath, options: .atomic)
                 } catch {
                     self.delegate?.didHaveDrawingError()
                 }

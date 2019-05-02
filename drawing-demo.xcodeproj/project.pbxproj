@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CBAB96D32278CF9A00756EDF /* VideoComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB96D22278CF9A00756EDF /* VideoComposer.swift */; };
+		CBAB96D5227A147E00756EDF /* VideoGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB96D4227A147E00756EDF /* VideoGenerator.swift */; };
+		CBAB96D9227A148C00756EDF /* AVAssetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB96D6227A148C00756EDF /* AVAssetExtension.swift */; };
+		CBAB96DA227A148C00756EDF /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB96D7227A148C00756EDF /* ImageExtension.swift */; };
+		CBAB96DB227A148C00756EDF /* VideoGeneratorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB96D8227A148C00756EDF /* VideoGeneratorError.swift */; };
 		CBCF182422763B420064F284 /* DrawingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCF182322763B420064F284 /* DrawingImageView.swift */; };
 		E746F6F92270BAE000ED97C5 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E746F6F82270BAE000ED97C5 /* MainTabBarController.swift */; };
 		E746F6FE2270BBBB00ED97C5 /* FirstViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E746F6FD2270BBBB00ED97C5 /* FirstViewController.storyboard */; };
@@ -45,6 +50,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CBAB96D22278CF9A00756EDF /* VideoComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoComposer.swift; sourceTree = "<group>"; };
+		CBAB96D4227A147E00756EDF /* VideoGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoGenerator.swift; sourceTree = "<group>"; };
+		CBAB96D6227A148C00756EDF /* AVAssetExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAssetExtension.swift; sourceTree = "<group>"; };
+		CBAB96D7227A148C00756EDF /* ImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
+		CBAB96D8227A148C00756EDF /* VideoGeneratorError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoGeneratorError.swift; sourceTree = "<group>"; };
 		CBCF182322763B420064F284 /* DrawingImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingImageView.swift; sourceTree = "<group>"; };
 		E746F6F82270BAE000ED97C5 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		E746F6FD2270BBBB00ED97C5 /* FirstViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = FirstViewController.storyboard; path = Base.lproj/FirstViewController.storyboard; sourceTree = "<group>"; };
@@ -184,6 +194,11 @@
 				E7F3541B2270BD5500612A79 /* ThirdViewController.storyboard */,
 				CBCF182322763B420064F284 /* DrawingImageView.swift */,
 				E7F3541A2270BD5500612A79 /* ThirdViewController.swift */,
+				CBAB96D22278CF9A00756EDF /* VideoComposer.swift */,
+				CBAB96D4227A147E00756EDF /* VideoGenerator.swift */,
+				CBAB96D6227A148C00756EDF /* AVAssetExtension.swift */,
+				CBAB96D7227A148C00756EDF /* ImageExtension.swift */,
+				CBAB96D8227A148C00756EDF /* VideoGeneratorError.swift */,
 			);
 			path = Third;
 			sourceTree = "<group>";
@@ -344,12 +359,17 @@
 			files = (
 				E7F354242270BD6100612A79 /* FourthViewController.swift in Sources */,
 				E7AD9BD72270B8D5005B1958 /* SecondViewController.swift in Sources */,
+				CBAB96D32278CF9A00756EDF /* VideoComposer.swift in Sources */,
+				CBAB96DB227A148C00756EDF /* VideoGeneratorError.swift in Sources */,
 				E7AD9BD32270B8D5005B1958 /* AppDelegate.swift in Sources */,
 				CBCF182422763B420064F284 /* DrawingImageView.swift in Sources */,
 				E7F3541D2270BD5500612A79 /* ThirdViewController.swift in Sources */,
 				E7AD9BD52270B8D5005B1958 /* FirstViewController.swift in Sources */,
+				CBAB96DA227A148C00756EDF /* ImageExtension.swift in Sources */,
 				E746F6F92270BAE000ED97C5 /* MainTabBarController.swift in Sources */,
+				CBAB96D9227A148C00756EDF /* AVAssetExtension.swift in Sources */,
 				E7F354292270BD6E00612A79 /* FifthViewController.swift in Sources */,
+				CBAB96D5227A147E00756EDF /* VideoGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

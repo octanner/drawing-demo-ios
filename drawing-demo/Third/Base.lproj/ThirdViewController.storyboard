@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8rJ-Kc-sve">
-    <device id="retina6_1" orientation="portrait">
+    <device id="ipad12_9rounded" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,11 +15,11 @@
             <objects>
                 <viewController title="Third" id="8rJ-Kc-sve" customClass="ThirdViewController" customModule="drawing_demo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kJd-0m-es1">
-                                <rect key="frame" x="358" y="54" width="36" height="30"/>
+                                <rect key="frame" x="1310" y="34" width="36" height="30"/>
                                 <state key="normal" title="Clear">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -27,42 +27,56 @@
                                     <action selector="clearTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="4ed-WT-hiL"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLc-aZ-6oC">
-                                <rect key="frame" x="10" y="115" width="394" height="61"/>
-                                <string key="text">This view creates a video of drawing and an audio message. Press Record and start drawing and speaking. When finished, press Stop.</string>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLc-aZ-6oC">
+                                <rect key="frame" x="40" y="106" width="1286" height="41"/>
+                                <string key="text">This view creates a video of drawing and an audio message. Press Record and start drawing and speaking. Use a finger or Apple pencil (or both) to draw. Try to keep it under 12 seconds to save processing time, which is a minute or two. When finished, press Stop.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jh9-gq-4q4" customClass="DrawingImageView" customModule="drawing_demo" customModuleProvider="target">
-                                <rect key="frame" x="10" y="216" width="394" height="285"/>
+                                <rect key="frame" x="70" y="167" width="1226" height="690"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="jh9-gq-4q4" secondAttribute="height" multiplier="394:285" id="dbz-da-nUH"/>
+                                    <constraint firstAttribute="width" secondItem="jh9-gq-4q4" secondAttribute="height" multiplier="16:9" id="dbz-da-nUH"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n9a-MX-eYU">
-                                <rect key="frame" x="178" y="561" width="58" height="34"/>
+                                <rect key="frame" x="643" y="867" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="5r1-N4-odn"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="E7D-tP-tii"/>
+                                </constraints>
                                 <state key="normal" title="Record"/>
                                 <connections>
                                     <action selector="recordTapped:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="YK3-AU-IBQ"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Progress" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3O-ct-De0">
+                                <rect key="frame" x="649" y="877" width="68" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="h3O-ct-De0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="O1u-W8-tvY" secondAttribute="leading" id="0zC-ox-OOC"/>
                             <constraint firstItem="PLc-aZ-6oC" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="11E-Bk-oFA"/>
+                            <constraint firstItem="O1u-W8-tvY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="h3O-ct-De0" secondAttribute="trailing" id="AQz-3f-4hR"/>
                             <constraint firstItem="O1u-W8-tvY" firstAttribute="trailing" secondItem="kJd-0m-es1" secondAttribute="trailing" constant="20" id="Dd1-6e-cbS"/>
-                            <constraint firstItem="O1u-W8-tvY" firstAttribute="trailing" secondItem="PLc-aZ-6oC" secondAttribute="trailing" constant="10" id="HkP-CD-eV0"/>
-                            <constraint firstItem="jh9-gq-4q4" firstAttribute="top" secondItem="PLc-aZ-6oC" secondAttribute="bottom" constant="40" id="KRg-ii-hlp"/>
+                            <constraint firstItem="O1u-W8-tvY" firstAttribute="trailing" secondItem="PLc-aZ-6oC" secondAttribute="trailing" constant="40" id="HkP-CD-eV0"/>
                             <constraint firstItem="n9a-MX-eYU" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="Noi-0V-Owl"/>
+                            <constraint firstItem="h3O-ct-De0" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="VvL-cS-rSz"/>
                             <constraint firstItem="kJd-0m-es1" firstAttribute="top" secondItem="O1u-W8-tvY" secondAttribute="top" constant="10" id="Y1x-qB-Qf6"/>
-                            <constraint firstItem="jh9-gq-4q4" firstAttribute="centerY" secondItem="QS5-Rx-YEW" secondAttribute="centerY" multiplier="0.8" id="Zqi-nf-jSR"/>
-                            <constraint firstItem="jh9-gq-4q4" firstAttribute="leading" secondItem="O1u-W8-tvY" secondAttribute="leading" constant="10" id="bt7-XQ-OMS"/>
-                            <constraint firstItem="O1u-W8-tvY" firstAttribute="trailing" secondItem="jh9-gq-4q4" secondAttribute="trailing" constant="10" id="crU-nI-HrB"/>
-                            <constraint firstItem="n9a-MX-eYU" firstAttribute="top" secondItem="jh9-gq-4q4" secondAttribute="bottom" constant="60" id="fWc-Ij-fhB"/>
+                            <constraint firstItem="jh9-gq-4q4" firstAttribute="centerY" secondItem="QS5-Rx-YEW" secondAttribute="centerY" id="Zqi-nf-jSR"/>
+                            <constraint firstItem="jh9-gq-4q4" firstAttribute="leading" secondItem="O1u-W8-tvY" secondAttribute="leading" constant="70" id="bt7-XQ-OMS"/>
+                            <constraint firstItem="O1u-W8-tvY" firstAttribute="trailing" secondItem="jh9-gq-4q4" secondAttribute="trailing" constant="70" id="crU-nI-HrB"/>
+                            <constraint firstItem="h3O-ct-De0" firstAttribute="top" secondItem="jh9-gq-4q4" secondAttribute="bottom" constant="20" id="dwc-TK-fC4"/>
+                            <constraint firstItem="n9a-MX-eYU" firstAttribute="top" secondItem="jh9-gq-4q4" secondAttribute="bottom" constant="10" id="fWc-Ij-fhB"/>
                             <constraint firstItem="kJd-0m-es1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="O1u-W8-tvY" secondAttribute="leading" symbolic="YES" id="i4T-kZ-lwH"/>
-                            <constraint firstItem="PLc-aZ-6oC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="O1u-W8-tvY" secondAttribute="leading" id="oeX-h9-pCB"/>
+                            <constraint firstItem="jh9-gq-4q4" firstAttribute="top" secondItem="PLc-aZ-6oC" secondAttribute="bottom" constant="20" id="ipt-Xx-Glm"/>
+                            <constraint firstItem="PLc-aZ-6oC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="O1u-W8-tvY" secondAttribute="leading" constant="40" id="oeX-h9-pCB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
@@ -71,6 +85,7 @@
                     <connections>
                         <outlet property="clearButton" destination="kJd-0m-es1" id="eNr-sF-nBs"/>
                         <outlet property="drawingCanvas" destination="jh9-gq-4q4" id="p7f-cG-qZi"/>
+                        <outlet property="progressLabel" destination="h3O-ct-De0" id="6hf-X1-Oeu"/>
                         <outlet property="recordButton" destination="n9a-MX-eYU" id="lCQ-iZ-LuK"/>
                     </connections>
                 </viewController>
