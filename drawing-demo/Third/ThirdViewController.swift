@@ -12,6 +12,7 @@ import UIKit
 import AVFoundation
 import Photos
 
+/// Demo for making a video out of active drawing and an audio recording. Saves video to the media library.
 class ThirdViewController: UIViewController {
     
     // MARK: - Properties
@@ -53,7 +54,7 @@ class ThirdViewController: UIViewController {
     }
     
     override func didReceiveMemoryWarning() {
-        // If crap hits the fan on memory, stop the recording
+        // Stop the recording
         recordTapped(self)
         debugPrint("Ran out of memory, stopping recording.")
     }
@@ -64,6 +65,8 @@ class ThirdViewController: UIViewController {
         drawingCanvas.clearCanvas(animated: true)
         showRecordingUI(false)
         clearFiles()
+        images.removeAll()
+        times.removeAll()
     }
     
     @IBAction func recordTapped(_ sender: Any) {
@@ -186,15 +189,18 @@ extension ThirdViewController {
     
     /// Audio error alert
     func showAudioSessionError(message: String) {
-        self.recordButton.isEnabled = false
-        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Okay", style: .default, handler: nil)
-        alertController.addAction(action)
-        self.present(alertController, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.recordButton.isEnabled = false
+            let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+            let action = UIAlertAction(title: "Okay", style: .default, handler: nil)
+            alertController.addAction(action)
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
     
     /// Fires up an audio recorder
     func startAudioRecording() {
+        times.removeAll()
         let audioFilename = audioFileURL()
         
         let settings = [
@@ -216,16 +222,26 @@ extension ThirdViewController {
     
     /// Reacts to success or failure of audio recording
     func finishAudioRecording(success: Bool) {
-        audioRecorder.stop()
-        audioRecorder = nil
-        recordButton.setTitle("Record", for: .normal)
-        
-        // If things go bad, try to start over.
-        if !success {
-            let alertController = UIAlertController(title: "Error", message: "Something went wrong with the recording. Please try again.", preferredStyle: .alert)
+        DispatchQueue.main.async {
+            self.audioRecorder.stop()
+            self.audioRecorder = nil
+            self.recordButton.setTitle("Record", for: .normal)
+            
+            // If things go bad, try to start over.
+            if !success {
+                self.showAudioErrorRetry()
+            }
+        }
+    }
+    
+    private func showAudioErrorRetry() {
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "Error", message: "Something went wrong with the audio recording. Please try again.", preferredStyle: .alert)
             let action = UIAlertAction(title: "Okay", style: .default) { (action:UIAlertAction) in
                 self.drawingCanvas.clearCanvas(animated: true)
                 self.clearFiles()
+                self.times.removeAll()
+                self.images.removeAll()
             }
             alertController.addAction(action)
             self.present(alertController, animated: true, completion: nil)
@@ -236,97 +252,116 @@ extension ThirdViewController {
     
     /// Combines the audio recording with the saved drawing images.
     func createVideo() {
-        
-        // This is where I started, but I wasn't able to finish in time, so I used some open source. Blah!
-        //        let video = VideoComposer()
-        //        video.createVideo(with: images, times: times, audio: audioFileURL()) { (progress, success, error) in
-        //            print("done")
-        //        }
-        //    }
-        
-        images.removeAll()  // reset array, which has changed its use and timing a few times
-        showRecordingUI(true)
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-        if let filePath = paths.first?.appendingPathComponent("drawing\(times.count).jpg") {
-            while UIImage(contentsOfFile: filePath.path) == nil {
-                // This is dangerous! Wait for the last image file to be done writing.
-//                debugPrint("Not ready yet! drawing\(times.count).jpg")
-            }
-        }
-
-        DispatchQueue.main.async {
-            self.progressLabel.text = "Creating new video with your drawing and voice. Please be patient. This can take a few minutes."
-        }
-        
-        // Because of memory issues of keeping all those images around, I'm saving images to file, so we don't crash.
-        for i in 1...times.count {
-            if let filePath = paths.first?.appendingPathComponent("drawing\(i).jpg"), let image = UIImage(contentsOfFile: filePath.path) {
-                images.append(image)
-            } else {
-                debugPrint("Could not load drawing\(i).png")
-            }
-        }
-//        debugPrint("We have \(images.count) images out of \(times.count) possible")
-        
-        // I wanted to use my own, but it was taking too long. Not happy about its linear drawing timing
-        VideoGenerator.current.fileName = "drawing"
-        VideoGenerator.current.shouldOptimiseImageForVideo = true
-        VideoGenerator.current.videoBackgroundColor = .white
-        VideoGenerator.current.videoImageWidthForMultipleVideoGeneration = 400  // bigger video means more memory
-        
-        // Grab our audio file, and get estimated progress numbers forit
-        let audioURL = audioFileURL()
-        let audioAsset = AVURLAsset.init(url: audioURL, options: nil)
-        let duration = audioAsset.duration.seconds
-        self.estimatedProgressStep = Float(duration) / 600
-        timer = Timer.scheduledTimer(timeInterval: duration/estimatedProcessing, target: self, selector: #selector(updateProgress), userInfo: nil, repeats: true)
-        
-        VideoGenerator.current.generate(withImages: images, andAudios: [audioURL], andType: .singleAudioMultipleImage, { (progress) in
-//            debugPrint("progress: \(progress)")
-            // This progress is really kinda useless! It's so fast it means nothing except we are almost done.
-            DispatchQueue.main.async {
-                self.progressLabel.text = "Finalizing video..."
-            }
-            
-        }, success: { (sURL) in
-//            debugPrint("done")
-            self.images.removeAll()
-            DispatchQueue.main.async {
-                self.showRecordingUI(false)
-                // Copies our local video into the photo library if we gave our app permission
-                if let videoFilePath = paths.first?.appendingPathComponent("drawing.m4v") {
-                    if self.canSave {
-                        PHPhotoLibrary.shared().performChanges({
-                            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoFilePath)
-                        }) { saved, error in
-                            if saved {
-                                // What the heck, give some in your face success
-                                let alertController = UIAlertController(title: "Your video was successfully saved to your photo library.", message: nil, preferredStyle: .alert)
-                                let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                                alertController.addAction(defaultAction)
-                                self.present(alertController, animated: true, completion: nil)
-                            }
-                        }
-                    } else {
-                        // This user does not deserve a video, let's be honest.
-                        let alertController = UIAlertController(title: "Cannot Save Video", message: "You need to give permission to your photo library in Settings.", preferredStyle: .alert)
-                        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                        alertController.addAction(defaultAction)
-                        self.present(alertController, animated: true, completion: nil)
-                    }
+        DispatchQueue.global(qos: .background).async {
+            self.images.removeAll()  // reset array, which has changed its use and timing a few times
+            self.showRecordingUI(true)
+            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            if let filePath = paths.first?.appendingPathComponent("drawing\(self.times.count).jpg") {
+                while UIImage(contentsOfFile: filePath.path) == nil {
+                    // Wait for the last image file to be done writing. Demo only.
+                    //                debugPrint("Not ready yet! drawing\(times.count).jpg")
                 }
             }
-        }) { (error) in
-//            debugPrint("error!")
-            self.images.removeAll()
-            self.showRecordingUI(false)
-            let alertController = UIAlertController(title: "Error", message: "Something went wrong when creating the video. Please try again.", preferredStyle: .alert)
+            
+            DispatchQueue.main.async {
+                self.progressLabel.text = "Creating new video with your drawing and voice. Please be patient. This can take a few minutes."
+            }
+            
+            // Because of memory issues of keeping all those images around, I'm saving images to file, so we don't crash.
+            for i in 1...self.times.count {
+                if let filePath = paths.first?.appendingPathComponent("drawing\(i).jpg"), let image = UIImage(contentsOfFile: filePath.path) {
+                    self.images.append(image)
+                } else {
+                    debugPrint("Could not load drawing\(i).png")
+                    self.showRetry()
+                }
+            }
+            
+            // I wanted to use my own, but it was taking too long. So this is some open source. Not happy about its linear drawing timing!
+            // With more time, I'd want to build it to suit, respecting the actual times data.
+            VideoGenerator.current.fileName = "drawing"
+            VideoGenerator.current.shouldOptimiseImageForVideo = true
+            VideoGenerator.current.videoBackgroundColor = .white
+            VideoGenerator.current.videoImageWidthForMultipleVideoGeneration = 400  // bigger video means more memory
+            
+            // Grab our audio file, and get estimated progress numbers forit
+            let audioURL = self.audioFileURL()
+            let audioAsset = AVURLAsset.init(url: audioURL, options: nil)
+            let duration = audioAsset.duration.seconds
+            self.estimatedProgressStep = Float(duration) / 600
+            DispatchQueue.main.async {
+                self.timer = Timer.scheduledTimer(timeInterval: duration/self.estimatedProcessing, target: self, selector: #selector(self.updateProgress), userInfo: nil, repeats: true)
+            }
+            
+            VideoGenerator.current.generate(withImages: self.images, andAudios: [audioURL], andType: .singleAudioMultipleImage, { (progress) in
+
+                // This progress is really kinda useless! It's so fast it means nothing except we are almost done.
+                DispatchQueue.main.async {
+                    self.progressLabel.text = "Finalizing video..."
+                }
+                
+            }, success: { (sURL) in
+                self.images.removeAll()
+                DispatchQueue.main.async {
+                    self.showRecordingUI(false)
+                    // Copies our local video into the photo library if we gave our app permission
+                    if let videoFilePath = paths.first?.appendingPathComponent("drawing.m4v") {
+                        if self.canSave {
+                            PHPhotoLibrary.shared().performChanges({
+                                PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: videoFilePath)
+                            }) { saved, error in
+                                if saved {
+                                    self.showSuccess()
+                                }
+                            }
+                        } else {
+                            // This user does not deserve a video, let's be honest.
+                            self.showPermissions()
+                        }
+                    }
+                }
+            }) { (error) in
+                self.images.removeAll()
+                self.showRecordingUI(false)
+                self.showRetry()
+            }
+        }
+    }
+    
+    /// Show alert to offer retry if somehitng went wrong.
+    private func showRetry() {
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "Error", message: "Something went wrong when creating the video. Would you like to try again?", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "Okay", style: .default, handler: { (action) in
+                self.createVideo()
+            })
+            alertController.addAction(defaultAction)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    private func showPermissions() {
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "Cannot Save Video", message: "You need to give permission to your photo library in Settings.", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(defaultAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    private func showSuccess() {
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "Your video was successfully saved to your photo library.", message: nil, preferredStyle: .alert)
             let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertController.addAction(defaultAction)
             self.present(alertController, animated: true, completion: nil)
         }
     }
 }
+
+// MARK: - AVAudioRecorderDelegate Methods
 
 extension ThirdViewController: AVAudioRecorderDelegate {
 
@@ -343,12 +378,13 @@ extension ThirdViewController: AVAudioRecorderDelegate {
     }
 }
 
+
+// MARK: - DrawingImageViewDelegate Methods
+
 extension ThirdViewController: DrawingImageViewDelegate {
     
     func didHaveDrawingError() {
-        DispatchQueue.main.async {
-            self.finishAudioRecording(success: false)
-        }
+        self.finishAudioRecording(success: false)
     }
 
     func didUpdateImages(with images: [UIImage], times: [TimeInterval]) {

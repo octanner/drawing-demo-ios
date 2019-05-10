@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CBAB96D32278CF9A00756EDF /* VideoComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB96D22278CF9A00756EDF /* VideoComposer.swift */; };
 		CBAB96D5227A147E00756EDF /* VideoGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB96D4227A147E00756EDF /* VideoGenerator.swift */; };
 		CBAB96D9227A148C00756EDF /* AVAssetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB96D6227A148C00756EDF /* AVAssetExtension.swift */; };
 		CBAB96DA227A148C00756EDF /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBAB96D7227A148C00756EDF /* ImageExtension.swift */; };
@@ -50,7 +49,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		CBAB96D22278CF9A00756EDF /* VideoComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoComposer.swift; sourceTree = "<group>"; };
 		CBAB96D4227A147E00756EDF /* VideoGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoGenerator.swift; sourceTree = "<group>"; };
 		CBAB96D6227A148C00756EDF /* AVAssetExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAssetExtension.swift; sourceTree = "<group>"; };
 		CBAB96D7227A148C00756EDF /* ImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
@@ -194,7 +192,6 @@
 				E7F3541B2270BD5500612A79 /* ThirdViewController.storyboard */,
 				CBCF182322763B420064F284 /* DrawingImageView.swift */,
 				E7F3541A2270BD5500612A79 /* ThirdViewController.swift */,
-				CBAB96D22278CF9A00756EDF /* VideoComposer.swift */,
 				CBAB96D4227A147E00756EDF /* VideoGenerator.swift */,
 				CBAB96D6227A148C00756EDF /* AVAssetExtension.swift */,
 				CBAB96D7227A148C00756EDF /* ImageExtension.swift */,
@@ -359,7 +356,6 @@
 			files = (
 				E7F354242270BD6100612A79 /* FourthViewController.swift in Sources */,
 				E7AD9BD72270B8D5005B1958 /* SecondViewController.swift in Sources */,
-				CBAB96D32278CF9A00756EDF /* VideoComposer.swift in Sources */,
 				CBAB96DB227A148C00756EDF /* VideoGeneratorError.swift in Sources */,
 				E7AD9BD32270B8D5005B1958 /* AppDelegate.swift in Sources */,
 				CBCF182422763B420064F284 /* DrawingImageView.swift in Sources */,

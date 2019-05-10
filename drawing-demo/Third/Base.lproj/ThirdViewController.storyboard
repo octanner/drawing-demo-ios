@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8rJ-Kc-sve">
-    <device id="ipad12_9rounded" orientation="landscape">
+    <device id="ipad12_9rounded" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,11 +15,11 @@
             <objects>
                 <viewController title="Third" id="8rJ-Kc-sve" customClass="ThirdViewController" customModule="drawing_demo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
-                        <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kJd-0m-es1">
-                                <rect key="frame" x="1310" y="34" width="36" height="30"/>
+                                <rect key="frame" x="968" y="34" width="36" height="30"/>
                                 <state key="normal" title="Clear">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -28,21 +28,14 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLc-aZ-6oC">
-                                <rect key="frame" x="40" y="106" width="1286" height="41"/>
-                                <string key="text">This view creates a video of drawing and an audio message. Press Record and start drawing and speaking. Use a finger or Apple pencil (or both) to draw. Each tens seconds will take a minute to create. When finished, press Stop.</string>
+                                <rect key="frame" x="40" y="373.5" width="944" height="41"/>
+                                <string key="text">This view creates a video of drawing with an audio message. Press Record and start drawing and speaking. Use a finger or Apple pencil (or both) to draw. When finished, press Stop and the video will be created and placed in your Media Library.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jh9-gq-4q4" customClass="DrawingImageView" customModule="drawing_demo" customModuleProvider="target">
-                                <rect key="frame" x="70" y="167" width="1226" height="690"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="jh9-gq-4q4" secondAttribute="height" multiplier="16:9" id="dbz-da-nUH"/>
-                                </constraints>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n9a-MX-eYU">
-                                <rect key="frame" x="643" y="867" width="80" height="80"/>
+                                <rect key="frame" x="472" y="941.5" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="5r1-N4-odn"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="E7D-tP-tii"/>
@@ -53,17 +46,24 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Progress" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3O-ct-De0">
-                                <rect key="frame" x="649" y="877" width="68" height="20.5"/>
+                                <rect key="frame" x="478" y="951.5" width="68" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="NHU-Ey-gXf">
-                                <rect key="frame" x="315" y="907.5" width="736" height="4"/>
+                                <rect key="frame" x="247" y="982" width="530" height="4"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="4" id="6HN-8r-9Yy"/>
                                 </constraints>
                             </progressView>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jh9-gq-4q4" customClass="DrawingImageView" customModule="drawing_demo" customModuleProvider="target">
+                                <rect key="frame" x="70" y="434.5" width="884" height="497"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="jh9-gq-4q4" secondAttribute="height" multiplier="16:9" id="dbz-da-nUH"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -89,7 +89,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Third" image="first" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Video" image="MovieProjector" id="cPa-gy-q4n"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="clearButton" destination="kJd-0m-es1" id="eNr-sF-nBs"/>
@@ -105,6 +105,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
+        <image name="MovieProjector" width="13" height="13"/>
     </resources>
 </document>
